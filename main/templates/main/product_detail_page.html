@@ -4,27 +4,50 @@
   type="text/css"
   href="{% static 'css/main/product_detail_page.css'%}"
 />
-<div class="product-detail-page">
-  <img src="{{product.image_url}}" style="width: 100px" />
-  <div class=product-detail>
-    <p>샛별배송</p>
-    <p>상품명: {{product.name}}</p>
-    <div class="product-detail-price">
-      <p>{{product.discount_rate}} %</p>
-      <p>할인가: {{product.discount_price}} 원</p>
-
-  </div>
-  <div class ="product-detail-footer"></div>
-
-  
+<div class="detail-page">
+  <img src="{% static 'assets/img/product.png' %}" alt="상품 이미지"/>
+  <div class="product-detail-page">
+    <div class=product-detail>
+      <p class = "deliver-type">샛별배송</p>
+      <p class= "product-name">{{product.name}}</p>
+      <div class="product-detail-price">
+        <p class="product-discount_rate">{{product.discount_rate}} %</p>
+        <p class ="product-discount_price">{{product.discount_price}} 원</p>
+      </div>
+      <div class = "line1"></div>
+      <div class="notice">
+        <div class="product-notice-title">안내 사항</div>
+        <div class ="product-notice">{{product.notice}}</div>
+      </div>
+      <div class = "line2"></div>  
+      <div class="product-choice">
+        <p class="product-choice-title">상품 선택</p>
+        <div class="product-choice-option">
+          <p class="product-choice-type">[선물 세트] 유명산지 사과세트 3.6kg (12입)</p>
+          <div class="product-choice-quantity-button">
+            <button class="minus">-</button>
+            <p>1</p>
+            <button class="plus">+</button>
+          </div>
+        </div>
+      </div> 
+      <div class = "line3"></div>  
+    </div>
+    <div class="product-price">
+      <div class="product-total-price">
+        <p class="product-total-price-title">총 상품 금액 : </p>
+        <p class="product-total-price-value">{{product.discount_price}} 원</p>
+      </div>
+      <button class="login-button">
+        <p>로그인</p>
+      </button>
+    </div>
 </div>
 
 
-<p>{{product.name}}</p>
-<p>{{product.discount_rate}}%</p>
-<p>{{product.discount_price}} 원</p>
-<p>{{product.notice}}</p>
-<!-- 데이터 사용 예시 -->
+
+<div class ="product-detail-footer"></div>
+
 
 <script src="{% static 'js/main/product_detail_page.js'%}"></script>
 {% endblock %}
