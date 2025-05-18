@@ -54,15 +54,27 @@
           
           <div class="filter-category-label">
             <label>
-              <input type="checkbox" name="category" value="스킨케어/메이크업" />
+              <div class="checkbox">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.7751 7.575L9.0126 3.3375C9.1126 3.2375 9.22927 3.1875 9.3626 3.1875C9.49594 3.1875 9.6126 3.2375 9.7126 3.3375C9.8126 3.4375 9.8626 3.55625 9.8626 3.69375C9.8626 3.83125 9.8126 3.95 9.7126 4.05L5.1251 8.65C5.0251 8.75 4.90844 8.8 4.7751 8.8C4.64177 8.8 4.5251 8.75 4.4251 8.65L2.2751 6.5C2.1751 6.4 2.12719 6.28125 2.13135 6.14375C2.13552 6.00625 2.1876 5.8875 2.2876 5.7875C2.3876 5.6875 2.50635 5.6375 2.64385 5.6375C2.78135 5.6375 2.9001 5.6875 3.0001 5.7875L4.7751 7.575Z" fill="#999999"/>
+                </svg>
+              </div>
               <p>스킨케어/메이크업</p> <span class="count">68</span>
             </label><br />
             <label>
-              <input type="checkbox" name="category" value="욕실세면용품" />
+              <div class="checkbox">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.7751 7.575L9.0126 3.3375C9.1126 3.2375 9.22927 3.1875 9.3626 3.1875C9.49594 3.1875 9.6126 3.2375 9.7126 3.3375C9.8126 3.4375 9.8626 3.55625 9.8626 3.69375C9.8626 3.83125 9.8126 3.95 9.7126 4.05L5.1251 8.65C5.0251 8.75 4.90844 8.8 4.7751 8.8C4.64177 8.8 4.5251 8.75 4.4251 8.65L2.2751 6.5C2.1751 6.4 2.12719 6.28125 2.13135 6.14375C2.13552 6.00625 2.1876 5.8875 2.2876 5.7875C2.3876 5.6875 2.50635 5.6375 2.64385 5.6375C2.78135 5.6375 2.9001 5.6875 3.0001 5.7875L4.7751 7.575Z" fill="#999999"/>
+                </svg>
+              </div>
               <p>럭셔리뷰티</p> <span class="count">24</span>
             </label><br />
             <label>
-              <input type="checkbox" name="category" value="간식·과자·떡" />
+              <div class="checkbox">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.7751 7.575L9.0126 3.3375C9.1126 3.2375 9.22927 3.1875 9.3626 3.1875C9.49594 3.1875 9.6126 3.2375 9.7126 3.3375C9.8126 3.4375 9.8626 3.55625 9.8626 3.69375C9.8626 3.83125 9.8126 3.95 9.7126 4.05L5.1251 8.65C5.0251 8.75 4.90844 8.8 4.7751 8.8C4.64177 8.8 4.5251 8.75 4.4251 8.65L2.2751 6.5C2.1751 6.4 2.12719 6.28125 2.13135 6.14375C2.13552 6.00625 2.1876 5.8875 2.2876 5.7875C2.3876 5.6875 2.50635 5.6375 2.64385 5.6375C2.78135 5.6375 2.9001 5.6875 3.0001 5.7875L4.7751 7.575Z" fill="#999999"/>
+                </svg>
+              </div>
               <p>간식·과자·떡</p> <span class="count">28</span>
             </label><br />
           </div>
@@ -87,6 +99,11 @@
           <span class="divider"></span>
           <span>높은 가격순</span>
         </div>
+      </div>
+
+      <div class="filter-category-selected">
+        <div class="filter-category-selected-title"></div>
+        <div class="delete-btn"></div>
       </div>
 
       <div class="product-list">
@@ -130,5 +147,87 @@
 
 
 <!— js 파일 —>
-<script src="{% static 'js/main/main_page.js'%}"></script>
+<script>
+  /* main page - JS */
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoryLabels = document.querySelectorAll(".filter-category-label label");
+    const selectedContainer = document.querySelector(".filter-category-selected");
+    const selectedTitleArea = selectedContainer.querySelector(".filter-category-selected-title");
+    const productCount = document.querySelector(".product-count");
+    const resetButton = document.querySelector(".filter-close button");
+
+    let selectedCategories = [];
+
+    function updateSelectedView() {
+        selectedTitleArea.innerHTML = "";
+        let totalCount = 0;
+
+        selectedCategories.forEach((item) => {
+            const tag = document.createElement("div");
+            tag.classList.add("selected-tag");
+
+            tag.textContent = item.name;
+
+            const close = document.createElement("span");
+            close.textContent = " ✕";
+            close.style.cursor = "pointer";
+            close.style.marginLeft = "4px";
+            close.style.color = "#ddd";
+            close.addEventListener("click", function () {
+                selectedCategories = selectedCategories.filter(el => el.name !== item.name);
+                updateSelectedView();
+            });
+
+            tag.appendChild(close);
+            selectedTitleArea.appendChild(tag);
+
+            totalCount += item.count;
+        });
+
+        productCount.textContent = `총 ${totalCount}건`;
+
+        categoryLabels.forEach(label => {
+          const labelText = label.querySelector("p").textContent;
+          const checkbox = label.querySelector(".checkbox");
+        
+          if (selectedCategories.some(cat => cat.name === labelText)) {
+            checkbox.classList.add("checked");
+          } else {
+            checkbox.classList.remove("checked");
+          }
+        });
+    }
+
+    categoryLabels.forEach(label => {
+        const name = label.querySelector("p").textContent;
+        const countText = label.querySelector(".count").textContent;
+        const count = parseInt(countText, 10);
+
+        label.addEventListener("click", function () {
+          const exists = selectedCategories.find(cat => cat.name === name);
+          if (exists) {
+            selectedCategories = selectedCategories.filter(cat => cat.name !== name);
+          } else {
+            selectedCategories.unshift({ name, count });
+          }
+          updateSelectedView();
+        });
+    });
+
+    resetButton.addEventListener("click", function () {
+      selectedCategories = [];
+    
+      categoryLabels.forEach(label => {
+        const checkbox = label.querySelector(".checkbox");
+        checkbox.classList.remove("checked");
+      });
+    
+      selectedTitleArea.innerHTML = "";
+      productCount.textContent = "총 0건";
+    });
+    
+    updateSelectedView();
+  });
+
+</script>
 {% endblock %}

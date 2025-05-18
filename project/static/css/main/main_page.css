@@ -69,6 +69,14 @@
     align-items: flex-start;
 }
 
+.selected-tag {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 8px;
+    font-size: 14px;
+    color: #5f0080; 
+}
+
 .filter-title {
     display: flex;
     padding-bottom: 20px;
@@ -146,6 +154,24 @@
     align-self: stretch;
 }
 
+.checkbox {
+    display: flex;
+    width: 18px;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--stroke-stroke-2, #E2E2E2);
+}
+
+.checkbox svg {
+    display: none;
+}
+.checkbox.checked svg {
+    display: block;
+}
+
 .filter-category-label label {
     display: flex;
     justify-content: center;
@@ -165,6 +191,29 @@
     color: #DDDDDD;
 }
 
+.filter-category-selected {
+    display: flex;
+    padding: 20px 16px 18px 16px;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    border: 1px solid var(--stroke-stroke-2, #E2E2E2);
+}
+
+.filter-category-selected-title {
+    color: var(--point-main, #5E0080);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -1px;
+}
+
+.delete-btn {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
 
 /* 우측 상품 목록 */
 .right-banner {

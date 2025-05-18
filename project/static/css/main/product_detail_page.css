@@ -158,7 +158,7 @@
     width: 20px;
 }
 
-.product-choice-quantity-button p {
+.quantity {
     color: var(--font-font-1, #333);
     text-align: center;
     font-size: 14px;
