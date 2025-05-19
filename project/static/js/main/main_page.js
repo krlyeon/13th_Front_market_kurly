@@ -1,10 +1,9 @@
-/* main page - JS */
 document.addEventListener("DOMContentLoaded", function () {
-    const categoryLabels = document.querySelectorAll(".filter-category-label label");
+    const categoryLabel = document.querySelectorAll(".filter-category-label label");
     const selectedContainer = document.querySelector(".filter-category-selected");
     const selectedTitleArea = selectedContainer.querySelector(".filter-category-selected-title");
     const productCount = document.querySelector(".product-count");
-    const deleteButton = selectedContainer.querySelector(".delete-btn");
+    const resetButton = document.querySelector(".filter-close button");
 
     let selectedCategories = [];
 
@@ -22,42 +21,42 @@ document.addEventListener("DOMContentLoaded", function () {
             close.textContent = " ✕";
             close.style.cursor = "pointer";
             close.style.marginLeft = "4px";
+            close.style.color = "#ddd";
             close.addEventListener("click", function () {
-                selectedCategories = selectedCategories.filter(el => el.name !== item.name);
+                selectedCategories = selectedCategories.filter(category => category.name !== item.name);
                 updateSelectedView();
             });
 
             tag.appendChild(close);
             selectedTitleArea.appendChild(tag);
-
             totalCount += item.count;
         });
 
         productCount.textContent = `총 ${totalCount}건`;
 
-        categoryLabels.forEach(label => {
+        categoryLabel.forEach(label => {
             const labelText = label.querySelector("p").textContent;
             const checkbox = label.querySelector(".checkbox");
 
-            if (selectedCategories.some(cat => cat.name === labelText)) {
-                checkbox.style.backgroundColor = "#5f0080";
+            if (selectedCategories.some(category => category.name === labelText)) {
+                checkbox.classList.add("checked");
             } else {
-                checkbox.style.backgroundColor = "transparent";
+                checkbox.classList.remove("checked");
             }
         });
     }
 
-    categoryLabels.forEach(label => {
+    categoryLabel.forEach(label => {
         const name = label.querySelector("p").textContent;
         const countText = label.querySelector(".count").textContent;
         const count = parseInt(countText, 10);
 
         label.addEventListener("click", function () {
-            const exists = selectedCategories.find(cat => cat.name === name);
+            const exists = selectedCategories.find(category => category.name === name);
             if (exists) {
-                selectedCategories = selectedCategories.filter(cat => cat.name !== name);
+                selectedCategories = selectedCategories.filter(category => category.name !== name);
             } else {
-                selectedCategories.push({ name, count });
+                selectedCategories.unshift({ name, count });
             }
             updateSelectedView();
         });
@@ -65,7 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     resetButton.addEventListener("click", function () {
         selectedCategories = [];
-        updateSelectedView();
+
+        categoryLabel.forEach(label => {
+            const checkbox = label.querySelector(".checkbox");
+            checkbox.classList.remove("checked");
+        });
+        selectedTitleArea.innerHTML = "";
+        productCount.textContent = "총 0건";
     });
 
     updateSelectedView();

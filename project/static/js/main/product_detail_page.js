@@ -5,8 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalPriceElem = document.querySelector(".product-total-price-value");
 
     const unitPrice = parseInt(
-        totalPriceElem.textContent.replace(/[^\d]/g, ""),
-        10
+        totalPriceElem.textContent.replace(/[^\d]/g, ""),10
     );
 
     let quantity = parseInt(quantityElem.textContent, 10);
@@ -28,5 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
         quantity++;
         updateDisplay();
     });
-
 });
