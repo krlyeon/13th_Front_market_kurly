@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedContainer = document.querySelector(".filter-category-selected");
     const selectedTitleArea = selectedContainer.querySelector(".filter-category-selected-title");
     const productCount = document.querySelector(".product-count");
-    const resetButton = document.querySelector(".filter-close button");
+    const resetButton = document.querySelector(".filter-close");
 
     let selectedCategories = [];
 
@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkbox.classList.remove("checked");
             }
         });
+
+        const filterBox = document.querySelector(".filter-category-selected");
+        if (selectedCategories.length > 0) {
+            filterBox.classList.add("active");
+        } else {
+            filterBox.classList.remove("active");
+        }
     }
 
     categoryLabel.forEach(label => {
