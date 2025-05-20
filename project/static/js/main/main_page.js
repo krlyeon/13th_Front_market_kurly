@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         productCount.textContent = `총 ${totalCount}건`;
 
+        
+
         categoryLabel.forEach(label => {
             const labelText = label.querySelector("p").textContent;
             const checkbox = label.querySelector(".checkbox");
@@ -42,6 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkbox.classList.add("checked");
             } else {
                 checkbox.classList.remove("checked");
+            }
+
+            const filterBox = document.querySelector(".filter-category-selected");
+            if (selectedCategories.length > 0) {
+                filterBox.classList.add("active");
+            } else {
+                filterBox.classList.remove("active");
             }
         });
 
@@ -78,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         selectedTitleArea.innerHTML = "";
         productCount.textContent = "총 0건";
+        selectedContainer.classList.remove("active");
     });
 
     updateSelectedView();
