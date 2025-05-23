@@ -47,5 +47,73 @@
 
 
 <script src="{% static 'js/main/product_detail_page.js' %}"></script>
+
+<div class="screen">
+  <div
+    style="
+      width: 1050px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 0px;
+    "
+  >
   
+<!-- 여기에 후기를 작성하는 폼을 만들어주세요! -->
+<div class="product-comment">
+  <div class="H1 text-font1" style="margin: 10px">상품후기</div>
+    <form action = "create_comment/" method = "POST">
+      {% csrf_token %}
+      <select name="star" style="margin: 10px">
+        <option value="별점">별점</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <input id="text_area" type="textarea" name="content">
+      <input id="button_click" type="submit" value="등록" disabled> 
+    </form> 
+</div>
+  
+    {% for comment in comments %}
+    <div
+      style="
+        tdisplay: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px 8px;
+        border-bottom: solid 1px #d9d9d9;
+      "
+    >
+      <div style="display: flex; justify-content: space-between">
+        <p>평점:{{comment.star}}</p>
+        <a href="{% url 'main:delete_comment' comment.id %}">삭제</a>
+      </div>
+      <p class="B1">{{comment.content}}</p>
+    </div>
+    {% endfor%}
+  </div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		// 여기에 작성해주세요!
+    const textArea = document.getElementById("text_area");
+    const buttonClick = document.getElementById("button_click");
+
+    textArea.addEventListener("input", (event) () {
+      if (textArea.value.trim() !== "") {
+        buttonClick.disabled = false;
+        buttonClick.style.backgroundColor = "#5e0080";
+      } else {
+        buttonClick.disabled = true;
+        buttonClick.style.backgroundColor = "#DDDDDD";
+        buttonClick.style.Color = "#E2E2E2";
+      }
+    });
+
+	})
+</script>
 {% endblock %}
