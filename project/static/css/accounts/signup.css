@@ -35,7 +35,8 @@
 .line1 {
     width: 640px;
     height: 1px;
-    background: #000;
+    background-color: #000; 
+    flex-shrink: 0;
 }
 
 .signup-form {
@@ -69,17 +70,18 @@
     letter-spacing: -1px;
 }
 
-.signup-form input {
+#username {
     display: flex;
     height: 46px;
+    width: 438px;
     padding: 0px 1px 0px 11px;
     align-items: center;
     gap: 10px;
     align-self: stretch;
     border-radius: 4px;
     border: 1px solid var(--stroke-stroke-1, #CCC);
-    color: var(--font-font2, #999);
-    text-align: right;
+    color: var(--font-font-1, #333);
+    text-align: left;
     font-family: Pretendard;
     font-size: 14px;
     font-style: normal;
@@ -88,7 +90,28 @@
     letter-spacing: -1px;
 }
 
-.signup-input ul {
+.password-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1 0 0;
+}
+
+
+#password {
+    display: flex;
+    height: 46px;
+    padding: 0px 1px 0px 11px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--stroke-stroke-1, #CCC);
+}
+
+.password-info ul {
     color: #999;
     font-family: Pretendard;
     font-size: 12px;
@@ -97,10 +120,45 @@
     line-height: 16px;
 }
 
+#password2 {
+    display: flex;
+    height: 46px;
+    width:438px;
+    padding: 0px 1px 0px 11px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--stroke-stroke-1, #CCC);
+}
+
+.error-check {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.error-message {
+    color: var(--point-red, #FA622F);
+    text-align: left;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
 .line2 {
     width: 640px;
     height: 1px;
     background: #E2E2E2;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .submit {
@@ -118,4 +176,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
+}
+
+.submit.active {
+    background: #5E0080;
+    color: #FFFFFF;
 }

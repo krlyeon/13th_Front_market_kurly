@@ -5,6 +5,7 @@
   rel="stylesheet"
   type="text/css"
   href="{% static 'css/accounts/signup.css'%}"
+
 />
 <div class="signup-container">
   <div class="signup-information">
@@ -22,16 +23,19 @@
         <div class="password-info">
           <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" required />
           <ul>
-            <li>비밀번호를 8자 이상으로 작성해주세요.</li>
-            <li>영문 대소문자, 숫자, 특수문자를 하나 이상 포함해주세요.</li>
-            <li>사용가능 특수문자: @ ! ? - _</li>
+            <li>• 비밀번호를 8자 이상으로 작성해주세요.</li>
+            <li>• 영문 대소문자, 숫자, 특수문자를 하나 이상 포함해주세요.</li>
+            <li>• 사용가능 특수문자: @ ! ? - _</li>
           </ul>
         </div>
       </div>
 
       <div class="signup-input">
         <label for="password2">비밀번호 확인</label>
-        <input type="password2" id="password2" name="password2"  placeholder="비밀번호를 한번 더 입력해주세요" required />
+        <div class="error-check">
+          <input type="password" id="password2" name="password2"  placeholder="비밀번호를 한번 더 입력해주세요" required />
+          <div class="error-message" id="password-mismatch">비밀번호가 일치하지 않습니다!</div>
+        </div>
       </div>
 
       <div class="line2"></div>
@@ -39,4 +43,6 @@
     <button type="submit" class="submit">가입하기</button>
   </div>
 </div>
+
+<script src="{% static 'js/accounts/signup.js' %}"></script>
 {% endblock %}
