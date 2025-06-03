@@ -1,5 +1,37 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
-  <h2>로그인</h2>
+{% load static %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/accounts/login.css'%}"
+
+/>
+
+
+<div class="login-container">
+  <div class="login-form">
+    <h2>로그인</h2>
+    <div class="input-list">
+      <form method="post" id="login-form" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+        <div class="login-input1">
+          <input type="text" name="username" id="id_username"  placeholder="아이디를 입력해주세요" required>
+        </div>
+        <div class="login-input2">
+          <input type="password" name="password" id="id_password" placeholder="비밀번호를 입력해주세요" required>
+        </div>
+      </form>
+    </div>
+    <div class="find-user-info">
+      <div class="find-info">아이디 찾기 | 비밀번호 찾기</div>
+    </div>
+  </div>
+
+  <div class="login-page-button">
+    <button class="login-button" type="submit" form="login-form">로그인</button>
+    <button class="signup-button" onclick="location.href='{% url 'accounts:signup' %}'">회원가입</button>
+  </div>
 </div>
+
+<script src="{% static 'js/accounts/login.js' %}"></script>
 {% endblock %}
